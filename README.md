@@ -125,7 +125,7 @@ Loop through all `<code>` in the DOM and replace with highlighted code syntax.
 
 ## Development
 
-Clone this repo, then
+Clone this repo, then:
 
 ```shell
 # install

@@ -25,7 +25,7 @@ A note[^1]
 * [x] done
 
 ## Code highlight
-
+`css`
 ```css
 body {
     background-color:lightblue;
@@ -42,6 +42,7 @@ p {
 }
 ```
 
+`javascript`
 ```javascript
 // Function is called, the return value will end up in x
 let x = myFunction(4, 3);
