@@ -1,0 +1,35 @@
+{
+  "name": "@phucbm/github-markdown",
+  "version": "0.0.1",
+  "description": "Utils to turn markdown into pretty HTML (support GitHub Flavoured Markdown)",
+  "homepage": "https://github.com/phucbm/github-markdown",
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:phucbm/github-markdown"
+  },
+  "author": {
+    "name": "phucbm",
+    "url": "https://github.com/phucbm"
+  },
+  "keywords": [
+    "phucbm",
+    "github",
+    "es6",
+    "markdown"
+  ],
+  "main": "index.js",
+  "files": [
+    "src/*"
+  ],
+  "license": "MIT",
+  "dependencies": {
+    "@wooorm/starry-night": "^3.0.0",
+    "github-markdown-css": "^5.2.0",
+    "hast-util-to-dom": "^4.0.0",
+    "hast-util-to-html": "^9.0.0",
+    "mdast-util-from-markdown": "^2.0.0",
+    "mdast-util-gfm": "^3.0.0",
+    "mdast-util-to-hast": "^13.0.2",
+    "micromark-extension-gfm": "^3.0.0"
+  }
+}
