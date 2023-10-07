@@ -19,7 +19,7 @@ module.exports = merge(server, {
     devtool: false,
 
     // Where webpack looks to start building the bundle
-    entry: [entryPath + '/script.js'],
+    entry: [entryPath + '/example.js'],
 
     output: {
         path: paths.build,
