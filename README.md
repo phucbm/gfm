@@ -20,6 +20,8 @@ npm i @phucbm/gfm
 
 ## Use
 
+### GFM convert
+
 Say our document `example.md` contains:
 
 ```markdown
@@ -68,6 +70,29 @@ content.insertAdjacentHTML('beforeend', markdownToHtml(markdownText));
 
 See [demo](#)
 
+### Code highlight
+
+Your Markdown code block must have a language identifier like in the `example.md`, then run `highlightCodeSyntax()` only
+when the HTML has loaded.
+
+```javascript
+import markdownText from "./example.md";
+import {markdownToHtml} from "../src/markdown-to-html";
+import {highlightCodeSyntax} from "../src/code-syntax-highlight";
+
+const html = markdownToHtml(markdownText);
+
+// view console log
+console.log(html);
+
+// or insert to the DOM
+const content = document.querySelector('#content');
+content.insertAdjacentHTML('beforeend', markdownToHtml(markdownText));
+
+// code highlight
+highlightCodeSyntax().then();
+```
+
 ## API
 
 ### `markdownToHtml(markdown, options)`
@@ -85,6 +110,30 @@ Convert Markdown text to HTML text.
 ###### Return
 
 An HTML string.
+
+### `highlightCodeSyntax(codeBlocks)`
+
+Loop through all `<code>` in the DOM and replace with highlighted code syntax.
+
+###### Parameters
+
+- `codeBlocks` - HTMLElement, optional.
+
+###### Return
+
+`{Promise<HTMLElement[]>}`
+
+## Development
+
+Clone this repo, then:
+
+```shell
+# install
+npm i
+
+# run dev server
+npm run dev
+```
 
 ## License
 
