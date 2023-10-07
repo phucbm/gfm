@@ -10,10 +10,11 @@ import 'github-markdown-css/github-markdown.css';
  * https://github.com/syntax-tree/mdast-util-to-hast
  *
  * @param markdown
- * @param options
+ * @param toHastOptions
+ * @param toHtmlOptions
  * @returns {string}
  */
-export function markdownToHtml(markdown, options = {allowDangerousHtml: true}){
+export function markdownToHtml(markdown, toHastOptions = {allowDangerousHtml: true}, toHtmlOptions = {allowDangerousHtml: true}){
     // markdown string => markdown tree
     const mdast = fromMarkdown(markdown, {
         extensions: [gfm()],
@@ -21,8 +22,10 @@ export function markdownToHtml(markdown, options = {allowDangerousHtml: true}){
     })
 
     // markdown tree => html tree
-    const hast = toHast(mdast, options); // so-call tree
+    // https://github.com/syntax-tree/mdast-util-to-hast#options
+    const hast = toHast(mdast, toHastOptions); // so-call tree
 
     // html tree => html string
-    return toHtml(hast, options);
+    // https://github.com/syntax-tree/hast-util-to-html#options
+    return toHtml(hast, toHtmlOptions);
 }
