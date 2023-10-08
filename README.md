@@ -1,5 +1,7 @@
 # @phucbm/gfm
 
+![example branch parameter](https://github.com/phucbm/gfm/actions/workflows/deploy.yml/badge.svg?branch=gh-pages)
+
 > Turn Markdown text into [GitHub Flavored Markdown](https://github.github.com/gfm/) (GFM) with light/dark code syntax
 > highlight.
 
