@@ -1,6 +1,9 @@
 # @phucbm/gfm
 
 [![pages-build-deployment](https://github.com/phucbm/gfm/actions/workflows/pages/pages-build-deployment/badge.svg?branch=gh-pages)](https://github.com/phucbm/gfm/actions/workflows/pages/pages-build-deployment)
+[![release](https://badgen.net/github/release/phucbm/gfm/)](https://github.com/phucbm/gfm/releases/latest)
+[![npm](https://badgen.net/npm/v/@phucbm/gfm)](https://www.npmjs.com/package/@phucbm/gfm)
+[![license](https://badgen.net/github/license/phucbm/gfm/)](https://github.com/phucbm/gfm/blob/main/LICENSE)
 
 > Turn Markdown text into [GitHub Flavored Markdown](https://github.github.com/gfm/) (GFM) with light/dark code syntax
 > highlight.
@@ -35,6 +38,8 @@ npm i github-markdown-css
 
 Say our document `example.md` contains:
 
+<details><summary>View example.md</summary>
+
 ```markdown
 # GFM
 
@@ -63,8 +68,12 @@ A note[^1]
 * [x] done
 ```
 
+</details> 
+
 To be able to read the `.md` file format, add [`markdown-loader`](https://www.npmjs.com/package/markdown-loader) to
 your `webpack.config.js`
+
+<details><summary>View webpack.config.js</summary>
 
 ```javascript
 // webpack.config.js
@@ -91,6 +100,8 @@ export default {
 };
 ```
 
+</details> 
+
 …and our module `example.js` looks as follows:
 
 ```js
@@ -106,6 +117,44 @@ const content = document.querySelector('#content');
 content.insertAdjacentHTML('beforeend', markdownText);
 ```
 
+...with the `index.html` as below
+
+<details><summary>View index.html</summary>
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@phucbm/gfm</title>
+    <style>
+        body {box-sizing:border-box; margin:0;}
+        .container {
+            min-width:300px;
+            max-width:980px;
+            margin-left:auto;
+            margin-right:auto;
+            padding:45px;
+        }
+
+        @media (max-width:767px) {
+            .container {
+                padding:15px;
+            }
+        }
+    </style>
+</head>
+<body class="markdown-body">
+    <div class="container">
+        <div id="content"></div>
+    </div>
+</body>
+</html>
+```
+
+</details>
+
 See [how it looks like](https://phucbm.github.io/gfm/).
 
 ### Code highlight
@@ -114,7 +163,7 @@ Your Markdown code block must have a language identifier like in the `example.md
 when the HTML has loaded.
 
 ```javascript
-import {highlightCodeSyntax} from "../src/code-syntax-highlight";
+import {highlightCodeSyntax} from "@phucbm/gfm";
 
 // insert HTML
 
