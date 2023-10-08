@@ -1,16 +1,19 @@
 # @phucbm/gfm
 
-![example branch parameter](https://github.com/phucbm/gfm/actions/workflows/deploy.yml/badge.svg?branch=gh-pages)
+[![pages-build-deployment](https://github.com/phucbm/gfm/actions/workflows/pages/pages-build-deployment/badge.svg?branch=gh-pages)](https://github.com/phucbm/gfm/actions/workflows/pages/pages-build-deployment)
 
 > Turn Markdown text into [GitHub Flavored Markdown](https://github.github.com/gfm/) (GFM) with light/dark code syntax
 > highlight.
 
 ## What is this?
 
-This package provides a blazing fast way to turn your Markdown file into HTML text that support GFM syntax and code
-highlight, just like GitHub.
+Ever want to just write Markdown for your app, then make it to HTML with the styling from GitHub, along with code syntax
+highlight? This project was made for you.
 
-[When to use this?](https://github.com/syntax-tree/mdast-util-gfm#when-to-use-this)
+- Markdown to HTML using [`markdown-loader`](https://www.npmjs.com/package/markdown-loader) (webpack)
+- Light/dark GFM styling
+  from [sindresorhus/generate-github-markdown-css](https://github.com/sindresorhus/generate-github-markdown-css)
+- Code syntax highlight using [`starry-night`](https://github.com/wooorm/starry-night)
 
 ## Install
 
@@ -18,11 +21,17 @@ Install with [npm](https://docs.npmjs.com/cli/install):
 
 ```shell
 npm i @phucbm/gfm
+
+# webpack loader for markdown
+npm i markdown-loader
+
+# styling for GFM
+npm i github-markdown-css
 ```
 
 ## Use
 
-### GFM convert
+### Convert Markdown format using `markdown-loader` by [`markedjs`](https://marked.js.org/)
 
 Say our document `example.md` contains:
 
@@ -54,23 +63,50 @@ A note[^1]
 * [x] done
 ```
 
+To be able to read the `.md` file format, add [`markdown-loader`](https://www.npmjs.com/package/markdown-loader) to
+your `webpack.config.js`
+
+```javascript
+// webpack.config.js
+export default {
+    module: {
+        rules: [
+            {
+                test: /\.md$/,
+                use: [
+                    {
+                        loader: "html-loader",
+                    },
+                    {
+                        loader: "markdown-loader",
+                        options: {
+                            // Pass options to marked
+                            // See https://marked.js.org/using_advanced#options
+                        },
+                    },
+                ],
+            },
+        ],
+    },
+};
+```
+
 …and our module `example.js` looks as follows:
 
 ```js
 import markdownText from "./example.md";
-import {markdownToHtml} from "@phucbm/github-markdown";
+import 'github-markdown-css/github-markdown.css';
 
-const html = markdownToHtml(markdownText);
+// the Markdown text will be converted to HTML text using "markdown-loader"
+console.log(markdownText);
 
-// view console log
-console.log(html);
-
-// or insert to the DOM
 const content = document.querySelector('#content');
-content.insertAdjacentHTML('beforeend', markdownToHtml(markdownText));
+
+// insert the HTML text to the DOM
+content.insertAdjacentHTML('beforeend', markdownText);
 ```
 
-See [demo](#)
+See [how it looks like](https://phucbm.github.io/gfm/).
 
 ### Code highlight
 
@@ -78,40 +114,18 @@ Your Markdown code block must have a language identifier like in the `example.md
 when the HTML has loaded.
 
 ```javascript
-import markdownText from "./example.md";
-import {markdownToHtml} from "../src/markdown-to-html";
 import {highlightCodeSyntax} from "../src/code-syntax-highlight";
 
-const html = markdownToHtml(markdownText);
+// insert HTML
 
-// view console log
-console.log(html);
-
-// or insert to the DOM
-const content = document.querySelector('#content');
-content.insertAdjacentHTML('beforeend', markdownToHtml(markdownText));
-
-// code highlight
+// code highlight (only run once the HTML as loaded)
 highlightCodeSyntax().then();
 ```
 
+> **Info**
+> Check the folder `example` for demo files.
+
 ## API
-
-### `markdownToHtml(markdown, options)`
-
-Convert Markdown text to HTML text.
-
-###### Parameters
-
-- `markdown`
-- `toHastOptions` ([Options](https://github.com/syntax-tree/mdast-util-to-hast#options)) - configurations, default
-  is `{allowDangerousHtml: true}`
-- `toHtmlOptions` ([Options](https://github.com/syntax-tree/hast-util-to-html#options)) - configurations, default
-  is `{allowDangerousHtml: true}`
-
-###### Return
-
-An HTML string.
 
 ### `highlightCodeSyntax(codeBlocks)`
 

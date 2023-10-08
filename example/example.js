@@ -1,15 +1,14 @@
 import markdownText from "./example.md";
-import {markdownToHtml} from "../src/markdown-to-html";
+import 'github-markdown-css/github-markdown.css';
 import {highlightCodeSyntax} from "../src/code-syntax-highlight";
 
-const html = markdownToHtml(markdownText);
+// the Markdown text will be converted to HTML text using "markdown-loader"
+console.log(markdownText);
 
-// view console log
-console.log(html);
-
-// or insert to the DOM
 const content = document.querySelector('#content');
-content.insertAdjacentHTML('beforeend', markdownToHtml(markdownText));
+
+// insert the HTML text to the DOM
+content.insertAdjacentHTML('beforeend', markdownText);
 
 // code highlight
 highlightCodeSyntax().then();
