@@ -73,13 +73,12 @@ A note[^1]
 To be able to read the `.md` file format, add [`markdown-loader`](https://www.npmjs.com/package/markdown-loader) to
 your `webpack.config.js`
 
-<details><summary>View webpack.config.js</summary>
-
 ```javascript
 // webpack.config.js
 export default {
     module: {
         rules: [
+            // Markdown
             {
                 test: /\.md$/,
                 use: [
@@ -99,8 +98,6 @@ export default {
     },
 };
 ```
-
-</details> 
 
 …and our module `example.js` looks as follows:
 
